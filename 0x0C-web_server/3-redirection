@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Install a ngnix web server with a script
+# Configure your Nginx server so that /redirect_me is redirecting to another page.
 
-apt-get update -y
-apt-get install nginx -y
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
-sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-service nginx restart
+sudo apt -y update
+sudo apt install -y --allow-downgrades nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World!" > index.html
+sudo mv index.html /var/www/html/
+sudo sed -i "/listen 80 default_server/ a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+sudo service nginx restart
