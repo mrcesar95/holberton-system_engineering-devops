@@ -1,14 +1,18 @@
-# Script that instals and configures nginx on a server
+# Script that installs and configures nginx on a server
 
 package { 'nginx':
-  ensure => present,
+  ensure => 'installed'
 }
 
 file { '/var/www/html/index.html':
-  ensure  => present,
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'listen 80 default_server;',
-  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+  content => 'Hello World',
+}
+
+file_line { 'redirection-301':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
 }
 
 service { 'nginx':
