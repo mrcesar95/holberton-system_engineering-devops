@@ -35,9 +35,16 @@ defaults
 frontend http
         bind *:80
         mode http
+
+frontend www-https
         bind *:443 ssl crt /etc/letsencrypt/live/www.thecesar.tech/fullchain.pem
         default_backend web-server
+
 backend web-server
         balance roundrobin
+		redirect scheme https if !{ ssl_fc }
         server 3774-web-01 34.75.79.52:80 check
         server 3774-web-02 54.85.108.121:80 check
+
+backend letsencrypt-backend
+		server letsencrypt 127.0.0.1:54321
