@@ -29,14 +29,14 @@ if __name__ == "__main__":
         USER_ID = id
         USERNAME = jsuser[0].get("username")
 
-        with open("{}.csv".format(USER_ID), "w") as csvfile:
+        # export data in the csv file
+        with open(id + ".csv", "w", newline="") as csvfile:
             csv_writer = csv.writer(
                 csvfile, delimiter=",", quotechar='"',
-                quoting=csv.QUOTE_MINIMAL)
-            for doing in jstodos:
-                TASK_TITLE = doing.get("title")
-                TASK_COMPLETED = doing.get("completed")
-                TASK_USER_ID = doing.get("userId")
+                quoting=csv.QUOTE_ALL)
+            for task in jstodos:
+                TASK_COMPLETED_STATUS = task.get("completed")
+                TASK_TITLE = task.get("title")
                 csv_writer.writerow(
-                    [USER_ID, USERNAME, TASK_TITLE,
-                     TASK_COMPLETED, TASK_USER_ID])
+                    [USER_ID, USERNAME,
+                     TASK_COMPLETED_STATUS, TASK_TITLE])
