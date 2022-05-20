@@ -37,10 +37,10 @@ if __name__ == "__main__":
             TASK_TITLE = task.get("title")
             TASK_COMPLETED_STATUS = task.get("completed")
             # write the internal dict
-            user_id = task.get("title")
+            user_id = task.get("userId")
             taskdict = {"task": TASK_TITLE,
                         "completed": TASK_COMPLETED_STATUS,
-                        "username": USERNAME}
+                        "username": user_names.get(user_id)}
 
             if jsresult(user_id) is not None:
                 jsresult.get(user_id).append(taskdict)
