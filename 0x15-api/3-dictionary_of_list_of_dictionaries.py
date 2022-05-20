@@ -24,6 +24,7 @@ if __name__ == "__main__":
     # Assing values
     if jsuser and jstodos:
         jsresult = {}
+        user_names = {}
         for user in jsuser:
             USER_ID = user.get("id")
             USERNAME = user.get("username")
