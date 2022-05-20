@@ -28,8 +28,9 @@ if __name__ == "__main__":
         EMPLOYEE_NAME = jsuser[0].get("name")
         NUMBER_OF_DONE_TASKS = 0
         for task in jstodos:
-            if task.get("completed") is True:
-                TOTAL_NUMBER_OF_TASKS = len(jstodos)
+            if task.get("completed"):
+                NUMBER_OF_DONE_TASKS += 1
+            TOTAL_NUMBER_OF_TASKS = len(jstodos)
 
         # Print first line
         print("Employee {} is done with tasks({}/{}):"
